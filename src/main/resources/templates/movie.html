@@ -6,7 +6,7 @@
 
     <div class="container">
         <h2 class="py-4">Add new movie</h2>
-        <form th:action="@{/api/v1/movies/save}" th:object="${movie}" method="post">
+        <form th:action="@{/movies/save}" th:object="${movie}" method="post">
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
@@ -28,6 +28,20 @@
                         <option th:each="gender: ${genders}" th:text="${gender.name}" th:value="${gender.id}"></option>
                     </select>
                 </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="actors" class="col-sm-2 col-form-label">Actors</label>
+                <div class="col-sm-10">
+                    <select class="form-select" id="actors" th:field="*{actors}" onchange="actorSelected(this)">
+                        <option value="">Select an actor</option>
+                        <option th:each="actor: ${actors}" th:text="${actor.name}" th:value="${actor.id}" th:data-url="${actor.urlImage}"></option>
+                    </select>
+                </div>
+            </div>
+            <input id="ids" name="ids" type="hidden">
+            <div id="actors-container" class="row">
+
             </div>
 
             <button type="submit" class="btn btn-primary float-end">Save</button>

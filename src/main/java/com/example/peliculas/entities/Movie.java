@@ -1,6 +1,8 @@
 package com.example.peliculas.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -18,15 +20,18 @@ public class Movie implements Serializable {
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull()
     private Date releaseDate;
 
     @Column
+    @NotEmpty()
     private String name;
 
     @ManyToOne
+    @NotNull()
     private Gender gender;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Actor> actors;
 
     public Long getId() {
