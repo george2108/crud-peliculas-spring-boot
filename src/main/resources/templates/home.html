@@ -6,6 +6,22 @@
 
     <div class="container">
         <h2>home</h2>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col" th:each="movie: ${movies}">
+                <div class="card">
+                    <img src="https://www.crunchyroll.com/imgsrv/display/thumbnail/1200x675/catalog/crunchyroll/1ecde018e863e2aaee31f00a23378c35.jpe" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${movie.name}"></h5>
+                        <p class="card-text" th:text="${movie.gender.name}"></p>
+                        <div class="catalog-actors-container" th:each="actor:${movie.actors}">
+                            <div class="actor-image" th:style="'background-image: url(' + ${actor.urlImage} + ')'"></div>
+                            <div class="actor-name" th:text="${actor.name}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

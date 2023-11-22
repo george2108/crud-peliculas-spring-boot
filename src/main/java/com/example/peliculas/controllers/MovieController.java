@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/movies")
 public class MovieController {
     private final IMovieService movieService;
     private final IGenderService genderService;
@@ -31,7 +30,7 @@ public class MovieController {
         this.actorService = actorService;
     }
 
-    @GetMapping
+    @GetMapping("/movies")
     public String saveView(Model model){
         Movie movie = new Movie();
         model.addAttribute("title", "New movie");
@@ -61,7 +60,9 @@ public class MovieController {
     }
 
     @GetMapping("/home")
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("title", "Movies");
+        model.addAttribute("movies", movieService.findAll());
         return "home";
     }
 
